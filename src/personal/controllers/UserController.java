@@ -3,6 +3,7 @@ package personal.controllers;
 import personal.model.Repository;
 import personal.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
@@ -14,6 +15,10 @@ public class UserController {
 
     public void saveUser(User user) {
         repository.CreateUser(user);
+    }
+
+    public List<User> readAllUsers(){
+        return repository.getAllUsers();
     }
 
     public User readUser(String userId) throws Exception {
