@@ -3,7 +3,6 @@ package personal.controllers;
 import personal.model.Repository;
 import personal.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
@@ -19,6 +18,11 @@ public class UserController {
 
     public List<User> readAllUsers(){
         return repository.getAllUsers();
+    }
+
+    public User updateUser(User user){
+        User updatedUser = repository.updateUser(user);
+        return updatedUser;
     }
 
     public User readUser(String userId) throws Exception {

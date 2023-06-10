@@ -32,6 +32,9 @@ public class ViewUser {
                     case LIST:
                         readList();
                         break;
+                    case UPDATE:
+                        updateUser();
+                        break;
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -39,24 +42,44 @@ public class ViewUser {
         }
     }
 
+    private void updateUser() throws Exception {
+        readList();
+        User user = getUser();
+        User updatedUser = getNewUser();
+        updatedUser.setId(user.getId());
+        User savedUser = userController.updateUser(updatedUser);
+        System.out.println(savedUser);
+    }
+
     private void readList() {
         List<User> listUsers = userController.readAllUsers();
-        for (User user: listUsers) {
+        for (User user : listUsers) {
             System.out.println(user);
         }
     }
 
     private void readUser() throws Exception {
-        String id = prompt("Идентификатор пользователя: ");
-        User user = userController.readUser(id);
+        User user = getUser();
         System.out.println(user);
     }
 
+    private User getUser() throws Exception {
+        String id = prompt("Идентификатор пользователя: ");
+        User user = userController.readUser(id);
+        return user;
+    }
+
     private void createUser() {
+        User newUser = getNewUser();
+        userController.saveUser(newUser);
+    }
+
+    private User getNewUser() {
         String firstName = prompt("Имя: ");
         String lastName = prompt("Фамилия: ");
         String phone = prompt("Номер телефона: ");
-        userController.saveUser(new User(firstName, lastName, phone));
+        User newUser = new User(firstName, lastName, phone);
+        return newUser;
     }
 
     private String prompt(String message) {
