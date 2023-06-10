@@ -18,7 +18,7 @@ public class ViewUser {
 
         while (true) {
             String command = prompt("Введите команду: ");
-            com = Commands.valueOf(command);
+            com = Commands.valueOf(command.toUpperCase());
             if (com == Commands.EXIT) return;
             switch (com) {
                 case CREATE:
