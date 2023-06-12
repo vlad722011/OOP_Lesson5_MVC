@@ -12,6 +12,10 @@ public class UserController {
         this.repository = repository;
     }
 
+    public User deleteUser(User user) {
+        repository.deleteUser(user);
+        return user;
+    }
     public void saveUser(User user) {
         repository.CreateUser(user);
     }
